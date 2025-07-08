@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .login-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            width: 100%;
+            max-width: 400px;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+     
+
+        .name input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .login-header p {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+            font-size: 0.95em;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e1e5e9;
+            border-radius: 10px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .form-group input::placeholder {
+            color: #999;
+            opacity: 1;
+        }
+
+      .name {
+            margin-bottom: 20px;
+        }
+        .name label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 500;
+            font-size: 0.95em;
+        }
+        .name input:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .form-group input.error {
+            border-color: #e74c3c;
+            background: #fdf2f2;
+        }
+
+        .form-group input.success {
+            border-color: #27ae60;
+            background: #f2fdf2;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 0.85em;
+            margin-top: 5px;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .success-message {
+            color: #27ae60;
+            font-size: 0.85em;
+            margin-top: 5px;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+        
+
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .login-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .login-btn .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-top: 2px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+
+
+        .divider span {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 0 20px;
+        }
+
+        
+       
+
+
+       
+
+
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group.password-field {
+            margin-bottom: 20px;
+        }
+
+        .strength-meter {
+            height: 4px;
+            background: #e1e5e9;
+            border-radius: 2px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+
+       
+
+        
+
+      
+
+      
+
+
+     
+
+     
+
+       
+
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 30px 20px;
+            }
+
+            .login-header h1 {
+                font-size: 2em;
+            }
+
+           
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h1>Assignment </h1>
+            <p>Validation Form</p>
+        </div>
+
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" required>
+                <div class="error-message" id="emailError"></div>
+                <div class="success-message" id="emailSuccess"></div>
+            </div>
+            <div class="name">
+                <label for="name"> Name</label>
+                <input type="text" name="" id="" required placeholder="Name">
+            </div>
+
+
+            <button type="submit" class="login-btn" id="loginBtn">
+                <span class="spinner" id="spinner"></span>
+                <span id="btnText">Sign In</span>
+            </button>
+
+
+        </form>
+
+
+
+    </div>
+
+    <script>
+        const loginForm = document.getElementById('loginForm');
+        const emailInput = document.getElementById('email');
+
+        const rememberCheckbox = document.getElementById('remember');
+        const loginBtn = document.getElementById('loginBtn');
+        const spinner = document.getElementById('spinner');
+        const btnText = document.getElementById('btnText');
+        const strengthFill = document.getElementById('strengthFill');
+
+        const emailError = document.getElementById('emailError');
+        const emailSuccess = document.getElementById('emailSuccess');
+
+
+
+
+        function validateEmail(email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
+        }
+
+
+
+        emailInput.addEventListener('input', function () {
+            const email = this.value.trim();
+
+            if (email === '') {
+                hideMessage(emailError);
+                hideMessage(emailSuccess);
+                this.classList.remove('error', 'success');
+                return;
+            }
+
+            if (validateEmail(email)) {
+                showSuccessMessage(emailSuccess, '✓ Valid email format');
+                this.classList.remove('error');
+                this.classList.add('success');
+                hideMessage(emailError);
+            } else {
+                showErrorMessage(emailError, 'Please enter a valid email address');
+                this.classList.remove('success');
+                this.classList.add('error');
+                hideMessage(emailSuccess);
+            }
+        });
+
+
+
+        function showErrorMessage(element, message) {
+            element.textContent = message;
+            element.style.display = 'block';
+        }
+
+        function showSuccessMessage(element, message) {
+            element.textContent = message;
+            element.style.display = 'block';
+        }
+
+        function hideMessage(element) {
+            element.style.display = 'none';
+        }
+
+
+        loginForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const email = emailInput.value.trim();
+
+            let isValid = true;
+
+            if (!email) {
+                showErrorMessage(emailError, 'Email is required');
+                emailInput.classList.add('error');
+                isValid = false;
+            } else if (!validateEmail(email)) {
+                showErrorMessage(emailError, 'Please enter a valid email address');
+                emailInput.classList.add('error');
+                isValid = false;
+            }
+
+
+
+            if (!isValid) return;
+
+            loginBtn.disabled = true;
+            spinner.style.display = 'inline-block';
+            btnText.textContent = 'Signing In...';
+
+            setTimeout(() => {
+                // Reset button
+                loginBtn.disabled = false;
+                spinner.style.display = 'none';
+                btnText.textContent = 'Sign In';
+
+
+            }, 2000);
+        });
+
+
+        updatePasswordStrength();
+    </script>
+</body>
+
+</html>
+def get_user_info():
+    """Get user name and email."""
+    name = input("Enter your name: ")
+    email = input("Enter your email: ")
+    return name, email
+
+def game():
+    """Main game function."""
+    print("Welcome to the Terminal Game!")
+    name, email = get_user_info()
+    print("\nYou have entered the following details:")
+    print(f"Name: {name}")
+    print(f"Email: {email}")
+    print("\nGame Over. Thanks for playing!")
+    return;
+    
+    
+
+
+    
+game()
